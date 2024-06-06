@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Message from "./Message";
 function MessageBoard() {
   const [inputMessage, setInputMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
@@ -46,17 +47,12 @@ function MessageBoard() {
       <div className="board">
         {messageList.map((el, index) => {
           return (
-            <div key={index}>
-              <div className="message">
-                {el}
-                <button
-                  className="delete-button"
-                  onClick={() => handleDelete(index)}
-                >
-                  x
-                </button>
-              </div>
-            </div>
+            <Message
+              key={index}
+              el={el}
+              index={index}
+              handleDelete={handleDelete}
+            />
           );
         })}
       </div>
