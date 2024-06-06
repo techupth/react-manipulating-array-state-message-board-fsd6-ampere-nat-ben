@@ -8,12 +8,23 @@ function MessageBoard() {
     setMessageList(newMessageList);
     setInputMessage("");
   };
-  const handleDelete = (elToDelete, indexToDelete) => {
-    const filteredMessageList = messageList.filter(
-      (_, index) => index !== indexToDelete
-    );
-    setMessageList(filteredMessageList);
+  // Method 1
+  // originalArr.filter (pure function) (subpar performance)
+  // const handleDelete = (indexToDelete) => {
+  //   const filteredMessageList = messageList.filter(
+  //     (_, index) => index !== indexToDelete
+  //   );
+  //   setMessageList(filteredMessageList);
+  // };
+
+  // Method 2
+  // shallowCloneArr.splice (best performance)
+  const handleDelete = (indexToDelete) => {
+    const splicedMessageList = [...messageList];
+    splicedMessageList.splice(indexToDelete, 1);
+    setMessageList(splicedMessageList);
   };
+
   return (
     <div className="app-wrapper">
       <h1 className="app-title">Message board</h1>
@@ -40,7 +51,7 @@ function MessageBoard() {
                 {el}
                 <button
                   className="delete-button"
-                  onClick={() => handleDelete(el, index)}
+                  onClick={() => handleDelete(index)}
                 >
                   x
                 </button>
